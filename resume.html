@@ -1,322 +1,1059 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume - Santhosh K | Data Analyst & Aspiring Data Scientist</title>
+  <title>Resume - Santhosh K | Data Analyst &amp; Aspiring Data Scientist</title>
+  <meta name="description" content="Professional Resume of Santhosh K — Data Analyst, Aspiring Data Scientist and Machine Learning Engineer.">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --primary: #0F172A;
-      --secondary: #334155;
-      --muted: #64748B;
+    :root, [data-theme="light"] {
+      --bg-page: #F8FAFC;
+      --bg-sheet: #FFFFFF;
+      --bg-subtle: #F1F5F9;
+      --bg-pill: #EFF6FF;
+      --text-main: #0F172A;
+      --text-body: #334155;
+      --text-muted: #64748B;
       --accent: #2563EB;
+      --accent-dark: #1D4ED8;
+      --accent-ring: rgba(37, 99, 235, 0.15);
       --border: #E2E8F0;
-      --bg: #FFFFFF;
+      --border-card: #E2E8F0;
+      --border-highlight: #93C5FD;
+      --shadow-sheet: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
     }
+
+    [data-theme="dark"] {
+      --bg-page: #0A0F1D;
+      --bg-sheet: #111A2E;
+      --bg-subtle: #17223B;
+      --bg-pill: rgba(59, 130, 246, 0.16);
+      --text-main: #F8FAFC;
+      --text-body: #CBD5E1;
+      --text-muted: #94A3B8;
+      --accent: #3B82F6;
+      --accent-dark: #2563EB;
+      --accent-ring: rgba(59, 130, 246, 0.3);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-highlight: #3B82F6;
+      --shadow-sheet: 0 16px 40px -6px rgba(0, 0, 0, 0.7);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      background-color: #F8FAFC;
-      color: var(--secondary);
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.55;
-      font-size: 14px;
-      padding: 36px 16px;
+      font-size: 13.5px;
+      padding: 32px 16px 64px;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      -webkit-font-smoothing: antialiased;
     }
-    .resume-page {
-      max-width: 820px;
-      margin: 0 auto;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
-      padding: 48px;
-    }
-    .print-bar {
-      max-width: 820px;
+
+    /* Top Utility Bar */
+    .utility-bar {
+      max-width: 860px;
       margin: 0 auto 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .btn-print {
-      background-color: var(--accent);
-      color: #FFF;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 6px;
+
+    .nav-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
       font-weight: 600;
-      cursor: pointer;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .nav-back-link:hover {
+      color: var(--accent);
+    }
+
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 13px;
-    }
-    .btn-back {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
       font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background-color: var(--bg-sheet);
+      color: var(--text-main);
+      transition: all 0.2s;
     }
-    .btn-back:hover { color: var(--accent); }
-    header {
-      border-bottom: 2px solid var(--border);
+
+    .btn-action:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn-action.primary {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-action.primary:hover {
+      background-color: var(--accent-dark);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+
+    /* The Resume Sheet Container */
+    .resume-sheet {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-sheet);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow-sheet);
+      padding: 48px 52px;
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    /* Top Accent Stripe */
+    .resume-sheet::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #1D4ED8, #2563EB, #3B82F6);
+    }
+
+    /* Header */
+    .resume-header {
+      border-bottom: 1.5px solid var(--border);
       padding-bottom: 24px;
       margin-bottom: 24px;
     }
-    h1 {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.02em;
-    }
-    .role-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .contact-line {
+
+    .header-top {
       display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 12px;
-      font-size: 12.5px;
-      color: var(--muted);
+      gap: 12px;
+      margin-bottom: 8px;
     }
-    .contact-line a {
-      color: var(--secondary);
-      text-decoration: none;
+
+    .candidate-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
     }
-    .contact-line a:hover { color: var(--accent); }
-    .section {
-      margin-bottom: 22px;
+
+    .candidate-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background-color: #ECFDF5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
     }
-    .section-title {
-      font-size: 13px;
+
+    [data-theme="dark"] .candidate-badge {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #10B981;
+    }
+
+    .candidate-title {
+      font-size: 14.5px;
       font-weight: 700;
+      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--primary);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 6px;
+      letter-spacing: 0.06em;
       margin-bottom: 14px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .contact-item svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-item a {
+      color: var(--text-body);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent);
+    }
+
+    /* Section Styling */
+    .resume-section {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-main);
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-    .item {
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
       margin-bottom: 14px;
     }
-    .item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4px;
-    }
-    .item-title {
-      font-size: 14.5px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    .item-subtitle {
-      font-size: 13px;
+
+    .section-title svg {
+      width: 15px;
+      height: 15px;
       color: var(--accent);
-      font-weight: 600;
     }
-    .item-date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
-      color: var(--muted);
+
+    /* Professional Summary */
+    .summary-text {
+      font-size: 13.2px;
+      color: var(--text-body);
+      line-height: 1.65;
     }
-    ul.item-bullets {
-      list-style-position: outside;
-      margin-left: 18px;
-      margin-top: 6px;
-    }
-    ul.item-bullets li {
-      margin-bottom: 4px;
-      color: var(--secondary);
-      line-height: 1.5;
-    }
+
+    /* Skills Grid */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
-    .skill-category b {
-      display: block;
-      color: var(--primary);
-      font-size: 12.5px;
-      margin-bottom: 3px;
+
+    .skill-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 12px 14px;
     }
-    .skill-category span {
-      color: var(--secondary);
+
+    .skill-category-title {
       font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+
+    .skill-category-title svg {
+      width: 13px;
+      height: 13px;
+      color: var(--accent);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .skill-pill {
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--bg-sheet);
+      border: 1px solid var(--border);
+      color: var(--text-body);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Experience & Project Items */
+    .timeline-entry {
+      margin-bottom: 18px;
+    }
+
+    .timeline-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .entry-role {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .entry-company {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-left: 6px;
+    }
+
+    .entry-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .entry-tech {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .entry-tech span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    ul.entry-bullets {
+      list-style-position: outside;
+      margin-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    ul.entry-bullets li {
+      font-size: 12.8px;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+
+    /* Education Item */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .edu-degree {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .edu-school {
+      font-size: 13px;
+      color: var(--text-body);
+      margin-bottom: 4px;
+    }
+
+    .cgpa-callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-pill);
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--accent-ring);
+    }
+
+    /* Certifications Grid */
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 16px;
+      list-style: none;
+    }
+
+    .cert-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 12.5px;
+      color: var(--text-body);
+    }
+
+    .cert-list li svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background-color: var(--text-main);
+      color: var(--bg-sheet);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 12.5px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s;
+      z-index: 999;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .toast-box.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ==========================================================================
+       Print Optimization (@media print)
+       Clean, Perfect 1-2 Page Output on Letter / A4
+       ========================================================================== */
     @media print {
-      body { background: #FFF; padding: 0; }
-      .print-bar { display: none; }
-      .resume-page { border: none; box-shadow: none; padding: 0; }
+      @page {
+        margin: 0.45in 0.5in;
+        size: A4 portrait;
+      }
+
+      body {
+        background: #FFFFFF !important;
+        color: #111827 !important;
+        padding: 0 !important;
+        font-size: 11.5px !important;
+        line-height: 1.45 !important;
+      }
+
+      .utility-bar, .toast-box {
+        display: none !important;
+      }
+
+      .resume-sheet {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        background: #FFFFFF !important;
+      }
+
+      .resume-sheet::before {
+        display: none !important;
+      }
+
+      .candidate-name {
+        font-size: 26px !important;
+        color: #000000 !important;
+      }
+
+      .candidate-title {
+        color: #1D4ED8 !important;
+        font-size: 12.5px !important;
+        margin-bottom: 8px !important;
+      }
+
+      .contact-grid {
+        gap: 4px 12px !important;
+        font-size: 10.5px !important;
+      }
+
+      .section-title {
+        font-size: 11px !important;
+        color: #000000 !important;
+        border-bottom: 1px solid #CBD5E1 !important;
+        margin-bottom: 8px !important;
+        padding-bottom: 3px !important;
+      }
+
+      .resume-section {
+        margin-bottom: 14px !important;
+        page-break-inside: avoid;
+      }
+
+      .timeline-entry {
+        margin-bottom: 10px !important;
+        page-break-inside: avoid;
+      }
+
+      .skill-card {
+        background: #F8FAFC !important;
+        border: 1px solid #E2E8F0 !important;
+        padding: 8px 10px !important;
+      }
+
+      .skill-pill {
+        background: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        color: #0F172A !important;
+        font-size: 9.5px !important;
+        padding: 1px 5px !important;
+      }
+
+      ul.entry-bullets li {
+        font-size: 11px !important;
+        color: #1E293B !important;
+      }
+
+      .cgpa-callout {
+        background: #EFF6FF !important;
+        color: #1D4ED8 !important;
+        border: 1px solid #BFDBFE !important;
+      }
+
+      a {
+        color: #0F172A !important;
+        text-decoration: none !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .resume-sheet { padding: 32px 20px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .cert-list { grid-template-columns: 1fr; }
+      .candidate-name { font-size: 26px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="print-bar">
-    <a href="index.html" class="btn-back">← Back to Portfolio Website</a>
-    <button class="btn-print" onclick="window.print()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-      Print / Save as PDF
-    </button>
+  <!-- Top Utility Bar -->
+  <div class="utility-bar">
+    <a href="index.html" class="nav-back-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to Portfolio
+    </a>
+
+    <div class="action-group">
+      <button class="btn-action" id="theme-btn" title="Toggle Dark/Light Mode">
+        <svg id="theme-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span id="theme-label">Dark Mode</span>
+      </button>
+
+      <button class="btn-action" id="copy-text-btn" title="Copy clean plaintext resume to clipboard">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        Copy Text
+      </button>
+
+      <button class="btn-action primary" onclick="window.print()" title="Print or save as high-resolution PDF">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Print / Save PDF
+      </button>
+    </div>
   </div>
 
-  <main class="resume-page">
-    <header>
-      <h1>Santhosh K</h1>
-      <div class="role-title">Data Analyst | Aspiring Data Scientist | Machine Learning Engineer</div>
-      <div class="contact-line">
-        <span>📍 Rajapalayam, Tamil Nadu, India</span>
-        <span>✉️ <a href="mailto:santhoshsudha128@gmail.com">santhoshsudha128@gmail.com</a></span>
-        <span>🔗 <a href="https://linkedin.com/in/santhosh-k-19a657343" target="_blank">linkedin.com/in/santhosh-k-19a657343</a></span>
-        <span>💻 <a href="https://github.com/SanthoshK-ux" target="_blank">github.com/SanthoshK-ux</a></span>
+  <!-- The Document Sheet -->
+  <main class="resume-sheet">
+    <!-- Header -->
+    <header class="resume-header">
+      <div class="header-top">
+        <h1 class="candidate-name">Santhosh K</h1>
+        <div class="candidate-badge">
+          <span class="badge-dot"></span>
+          AVAILABLE FOR OPPORTUNITIES
+        </div>
+      </div>
+
+      <div class="candidate-title">Data Analyst | Aspiring Data Scientist | Machine Learning Engineer</div>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Rajapalayam, Tamil Nadu, India</span>
+        </div>
+
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <a href="mailto:santhoshsudha128@gmail.com">santhoshsudha128@gmail.com</a>
+        </div>
+
+        <div class="contact-item">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          <a href="https://linkedin.com/in/santhosh-k-19a657343" target="_blank" rel="noopener">linkedin.com/in/santhosh-k-19a657343</a>
+        </div>
+
+        <div class="contact-item">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <a href="https://github.com/SanthoshK-ux" target="_blank" rel="noopener">github.com/SanthoshK-ux</a>
+        </div>
+
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <span>CodeChef: <b>angel_heart_07</b> (400+ Solved)</span>
+        </div>
+
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>CGPA: <b>8.1 / 10</b> (Ramco Institute)</span>
+        </div>
       </div>
     </header>
 
     <!-- Professional Summary -->
-    <section class="section">
-      <div class="section-title">Professional Summary</div>
-      <p style="font-size: 13px; color: var(--secondary); line-height: 1.6;">
-        Technically grounded Artificial Intelligence and Data Science undergraduate building practical solutions across Data Analytics, Business Intelligence, and Machine Learning. Proficient in transforming raw business datasets into actionable executive insights using Python, SQL, Power BI, and DAX, while actively developing NLP and predictive machine learning models.
+    <section class="resume-section">
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        Professional Summary
+      </div>
+      <p class="summary-text">
+        Technically grounded Artificial Intelligence and Data Science undergraduate focused on engineering data-driven solutions across Data Analytics, Business Intelligence, and Machine Learning. Proficient in transforming raw business datasets into executive insights using Python, SQL, Power BI, and DAX, with active hands-on development in NLP, semantic embeddings, and predictive modeling. Experienced in end-to-end data pipelines from ingestion and cleaning to interactive visualization and model inference.
       </p>
     </section>
 
-    <!-- Education -->
-    <section class="section">
-      <div class="section-title">Education</div>
-      <div class="item">
-        <div class="item-header">
-          <div>
-            <span class="item-title">B.Tech in Artificial Intelligence and Data Science</span>
-            <div class="item-subtitle">Ramco Institute of Technology, Rajapalayam, India</div>
-          </div>
-          <div class="item-date">Expected 2028 | CGPA: 8.1 / 10</div>
-        </div>
+    <!-- Technical Expertise -->
+    <section class="resume-section">
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        Technical Competencies
       </div>
-      <div class="item">
-        <div class="item-header">
-          <div>
-            <span class="item-title">Higher Secondary Education</span>
-            <div class="item-subtitle">T.N.P.M. Marimuthu Nadar Higher Secondary School</div>
-          </div>
-          <div class="item-date">Score: 470 / 600</div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Technical Skills -->
-    <section class="section">
-      <div class="section-title">Technical Skills</div>
       <div class="skills-grid">
-        <div class="skill-category">
-          <b>Data Analytics & BI:</b>
-          <span>Power BI, Tableau, Microsoft Excel, Power Query, DAX, KPI Tracking, Workforce Analytics</span>
+        <div class="skill-card">
+          <div class="skill-category-title">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            Data Analytics &amp; Business Intelligence
+          </div>
+          <div class="skill-tags">
+            <span class="skill-pill">Power BI</span>
+            <span class="skill-pill">Tableau</span>
+            <span class="skill-pill">Microsoft Excel</span>
+            <span class="skill-pill">Power Query</span>
+            <span class="skill-pill">DAX</span>
+            <span class="skill-pill">KPI Tracking</span>
+            <span class="skill-pill">Workforce Analytics</span>
+            <span class="skill-pill">Interactive Dashboards</span>
+          </div>
         </div>
-        <div class="skill-category">
-          <b>Programming & Databases:</b>
-          <span>Python, SQL, MySQL, Java</span>
+
+        <div class="skill-card">
+          <div class="skill-category-title">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            Programming &amp; Database Systems
+          </div>
+          <div class="skill-tags">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">SQL</span>
+            <span class="skill-pill">MySQL</span>
+            <span class="skill-pill">Java</span>
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">GitHub</span>
+            <span class="skill-pill">REST APIs</span>
+            <span class="skill-pill">JSON Parsing</span>
+          </div>
         </div>
-        <div class="skill-category">
-          <b>Data Science & Machine Learning:</b>
-          <span>Data Cleaning, Preprocessing, Exploratory Data Analysis, Statistical Modeling</span>
+
+        <div class="skill-card">
+          <div class="skill-category-title">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            Data Science &amp; Statistical Analysis
+          </div>
+          <div class="skill-tags">
+            <span class="skill-pill">Exploratory Data Analysis</span>
+            <span class="skill-pill">Data Cleaning</span>
+            <span class="skill-pill">Data Preprocessing</span>
+            <span class="skill-pill">Statistical Analysis</span>
+            <span class="skill-pill">Hypothesis Testing</span>
+            <span class="skill-pill">Feature Engineering</span>
+          </div>
         </div>
-        <div class="skill-category">
-          <b>AI & NLP Technologies:</b>
-          <span>Natural Language Processing (NLP), Sentence Transformers, TF-IDF, Semantic Text Matching, AI APIs</span>
+
+        <div class="skill-card">
+          <div class="skill-category-title">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="10 8 16 12 10 16 10 8"></polygon>
+            </svg>
+            AI &amp; Machine Learning
+          </div>
+          <div class="skill-tags">
+            <span class="skill-pill">Machine Learning</span>
+            <span class="skill-pill">NLP</span>
+            <span class="skill-pill">Sentence Transformers</span>
+            <span class="skill-pill">Semantic Text Matching</span>
+            <span class="skill-pill">TF-IDF Vectorization</span>
+            <span class="skill-pill">AI APIs</span>
+            <span class="skill-pill">Resume Intelligence</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Featured Projects -->
-    <section class="section">
-      <div class="section-title">Featured Projects</div>
+    <section class="resume-section">
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        Featured Technical Projects
+      </div>
 
-      <div class="item">
-        <div class="item-header">
-          <span class="item-title">HR Analytics Dashboard</span>
-          <span class="item-date">Power BI · Power Query · DAX · Excel</span>
+      <!-- Project 1: HR Analytics -->
+      <div class="timeline-entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-role">HR Analytics Dashboard</span>
+            <span class="entry-company">— Business Intelligence &amp; Analytics</span>
+          </div>
+          <span class="entry-date">Power BI · DAX · Power Query · Excel</span>
         </div>
-        <ul class="item-bullets">
-          <li>Constructed an interactive BI dashboard to monitor workforce headcount, attrition rates, gender diversity, and department trends.</li>
-          <li>Engineered automated data preparation pipelines in Power Query and authored custom DAX calculated measures for dynamic KPI tracking.</li>
-          <li>Implemented multi-level slicers allowing management to drill down into turnover metrics by department, tenure, and job role.</li>
+        <div class="entry-tech">
+          GitHub: <a href="https://github.com/SanthoshK-ux/HR-Data-Analytics" target="_blank" rel="noopener">github.com/SanthoshK-ux/HR-Data-Analytics</a>
+        </div>
+        <ul class="entry-bullets">
+          <li>Architected an enterprise Power BI dashboard analyzing workforce records across headcount, attrition percentage (16.1%), gender representation, and department turnover.</li>
+          <li>Constructed robust ETL transformations in Power Query to clean disparate data fields, handle null values, and structure relational star-schema tables.</li>
+          <li>Authored optimized DAX calculated measures (active workforce, attrition rate %, department breakdown) and integrated multi-dimensional slicers for real-time executive drill-down.</li>
         </ul>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <span class="item-title">AI Resume Analyzer</span>
-          <span class="item-date">Python · NLP · Sentence Transformers · TF-IDF · AI APIs</span>
+      <!-- Project 2: AI Resume Analyzer -->
+      <div class="timeline-entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-role">AI Resume Analyzer</span>
+            <span class="entry-company">— AI / NLP &amp; Machine Learning Platform</span>
+          </div>
+          <span class="entry-date">Python · NLP · Sentence Transformers · TF-IDF · AI APIs</span>
         </div>
-        <ul class="item-bullets">
-          <li>Developed an AI-powered resume evaluation tool calculating ATS similarity scores between candidate resumes and job postings.</li>
-          <li>Utilized Sentence Transformers and TF-IDF vectorization to perform semantic matching and pinpoint technical skill gaps.</li>
-          <li>Integrated AI API workflows to automatically generate actionable candidate feedback and targeted interview practice questions.</li>
+        <div class="entry-tech">
+          Platform: <span>Document Parsing · Vector Embeddings · Automated Feedback</span>
+        </div>
+        <ul class="entry-bullets">
+          <li>Engineered an AI-driven resume scoring platform evaluating technical candidate alignment against target job descriptions using dense text embeddings.</li>
+          <li>Implemented semantic matching via Sentence Transformers and TF-IDF vectorization to calculate cosine similarity scores and pinpoint missing technical competencies.</li>
+          <li>Integrated AI API workflows to automatically synthesize candidate critique and generate tailored technical interview questions based on detected skill gaps.</li>
         </ul>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <span class="item-title">Weather Application</span>
-          <span class="item-date">Python · Live Weather REST API · JSON</span>
+      <!-- Project 3: Weather App -->
+      <div class="timeline-entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-role">Weather Application</span>
+            <span class="entry-company">— Python Application</span>
+          </div>
+          <span class="entry-date">Python · RESTful Weather API · Requests · JSON</span>
         </div>
-        <ul class="item-bullets">
-          <li>Built a real-time weather retrieval utility consuming RESTful meteorological APIs for location-specific atmospheric data.</li>
-          <li>Implemented robust defensive error handling for invalid queries, rate limits, and network timeouts with clean data parsing.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Experience & Industry Learning -->
-    <section class="section">
-      <div class="section-title">Experience & Continuous Learning</div>
-
-      <div class="item">
-        <div class="item-header">
-          <span class="item-title">Data Analytics Internship / Training</span>
-          <span class="item-date">Internship</span>
-        </div>
-        <div style="font-size: 12.5px; color: var(--secondary);">Focused on practical Python fundamentals, data hygiene, exploratory data analysis, and business analytics.</div>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <span class="item-title">Industry Job Simulations & Certifications</span>
-          <span class="item-date">Completed</span>
-        </div>
-        <ul class="item-bullets">
-          <li><b>Tata Group (Forage):</b> GenAI Powered Data Analytics Job Simulation</li>
-          <li><b>Simplilearn:</b> Machine Learning using Python</li>
-          <li><b>Forage:</b> Data Labelling Job Simulation</li>
-          <li><b>TCS iON:</b> Career Edge - Employability Skills (IT)</li>
-          <li><b>Cisco Networking Academy:</b> Networking & Technology Workshops</li>
+        <ul class="entry-bullets">
+          <li>Built a real-time meteorological utility consuming live REST API endpoints to fetch location-based temperatures, humidity, wind velocity, and atmospheric status.</li>
+          <li>Implemented defensive error handling for invalid user city queries, network timeouts, and HTTP status codes, outputting structured, human-readable weather telemetry.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Achievements -->
-    <section class="section">
-      <div class="section-title">Achievements</div>
-      <ul class="item-bullets">
-        <li><b>CodeChef:</b> Solved 400+ coding problems focusing on foundational algorithms and data structures (Handle: <code style="font-family:'JetBrains Mono';">angel_heart_07</code>).</li>
-        <li><b>Industry Simulations:</b> Successfully completed multiple hands-on corporate simulations across GenAI analytics, Python ML, and data preprocessing.</li>
+    <!-- Experience & Learning -->
+    <section class="resume-section">
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        Experience &amp; Continuous Learning
+      </div>
+
+      <div class="timeline-entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-role">Data Analytics Internship / Training</span>
+            <span class="entry-company">— Hands-on Practical Program</span>
+          </div>
+          <span class="entry-date">Completed</span>
+        </div>
+        <p style="font-size: 12.8px; color: var(--text-body); line-height: 1.5; margin-top: 4px;">
+          Immersed in practical Python programming fundamentals, exploratory data analysis, dataset hygiene, and real-world analytical problem solving. Focused on transforming unstructured data into structured tables and formulating business conclusions.
+        </p>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-role">Industry Job Simulations &amp; Technical Certifications</span>
+            <span class="entry-company">— Corporate Programs</span>
+          </div>
+          <span class="entry-date">Verified Credentials</span>
+        </div>
+        <ul class="cert-list" style="margin-top: 8px;">
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><b>Tata Group (Forage):</b> GenAI Powered Data Analytics</span>
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><b>Simplilearn:</b> Machine Learning using Python</span>
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><b>Forage:</b> Data Labelling Job Simulation</span>
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><b>TCS iON:</b> Career Edge - Employability Skills (IT)</span>
+          </li>
+          <li style="grid-column: 1 / -1;">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><b>Cisco Networking Academy:</b> Networking &amp; Technology Workshops</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="resume-section">
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+        Education
+      </div>
+
+      <div class="timeline-entry">
+        <div class="edu-row">
+          <span class="edu-degree">B.Tech in Artificial Intelligence and Data Science</span>
+          <span class="cgpa-callout">CGPA: 8.1 / 10</span>
+        </div>
+        <div class="edu-school">Ramco Institute of Technology, Rajapalayam, Tamil Nadu, India</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);">
+          Expected Graduation: 2028 | Relevant Coursework: Data Structures, RDBMS, Python, Probability &amp; Statistics, Machine Learning
+        </div>
+      </div>
+
+      <div class="timeline-entry" style="margin-top: 10px;">
+        <div class="edu-row">
+          <span class="edu-degree">Higher Secondary Education</span>
+          <span class="cgpa-callout">Marks: 470 / 600</span>
+        </div>
+        <div class="edu-school">T.N.P.M. Marimuthu Nadar Higher Secondary School</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);">
+          Stream: Mathematics &amp; Physical Sciences
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Achievements -->
+    <section class="resume-section" style="margin-bottom: 0;">
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        Key Achievements &amp; Coding Milestones
+      </div>
+      <ul class="entry-bullets">
+        <li><b>CodeChef Competitive Problem Solving:</b> Solved <b>400+ coding problems</b> covering fundamental algorithms, sorting, searching, recursion, and data manipulation (Handle: <code style="font-family:'JetBrains Mono'; color:var(--accent);">angel_heart_07</code>).</li>
+        <li><b>Industry Simulations:</b> Successfully completed multiple enterprise job simulations in Generative AI analytics, machine learning algorithms, and dataset labeling.</li>
       </ul>
     </section>
   </main>
 
+  <!-- Toast Notification -->
+  <div class="toast-box" id="toast-box">Copied to clipboard!</div>
+
+  <script>
+    // Theme Switcher for Resume
+    const themeBtn = document.getElementById('theme-btn');
+    const themeLabel = document.getElementById('theme-label');
+    const themeIcon = document.getElementById('theme-icon');
+    const toastBox = document.getElementById('toast-box');
+
+    function showToast(msg) {
+      toastBox.textContent = msg;
+      toastBox.classList.add('show');
+      setTimeout(() => toastBox.classList.remove('show'), 2400);
+    }
+
+    function applyResumeTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        themeLabel.textContent = 'Light Mode';
+        themeIcon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+      } else {
+        themeLabel.textContent = 'Dark Mode';
+        themeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+      }
+    }
+
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    applyResumeTheme(savedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyResumeTheme(next);
+      localStorage.setItem('portfolio-theme', next);
+    });
+
+    // Listen for cross-frame message from parent portfolio if in iframe
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'set-theme') {
+        applyResumeTheme(e.data.theme);
+      }
+    });
+
+    // Copy Plaintext Resume to Clipboard
+    const copyTextBtn = document.getElementById('copy-text-btn');
+    copyTextBtn.addEventListener('click', () => {
+      const plainText = `SANTHOSH K
+Data Analyst | Aspiring Data Scientist | Machine Learning Engineer
+Rajapalayam, Tamil Nadu, India | santhoshsudha128@gmail.com
+LinkedIn: https://linkedin.com/in/santhosh-k-19a657343
+GitHub: https://github.com/SanthoshK-ux
+CodeChef: angel_heart_07 (400+ Problems Solved)
+
+PROFESSIONAL SUMMARY
+Technically grounded Artificial Intelligence and Data Science undergraduate focused on engineering data-driven solutions across Data Analytics, Business Intelligence, and Machine Learning. Proficient in transforming raw business datasets into executive insights using Python, SQL, Power BI, and DAX, with active hands-on development in NLP, semantic embeddings, and predictive modeling.
+
+TECHNICAL COMPETENCIES
+- Data Analytics & BI: Power BI, Tableau, Microsoft Excel, Power Query, DAX, KPI Tracking, Workforce Analytics
+- Programming & Databases: Python, SQL, MySQL, Java, Git, GitHub, REST APIs, JSON Parsing
+- Data Science & Modeling: Exploratory Data Analysis, Data Cleaning, Data Preprocessing, Statistical Analysis
+- AI & Machine Learning: Machine Learning, NLP, Sentence Transformers, Semantic Text Matching, TF-IDF, AI APIs
+
+FEATURED TECHNICAL PROJECTS
+1. HR Analytics Dashboard (Power BI · DAX · Power Query · Excel)
+   - Architected an enterprise Power BI dashboard analyzing workforce records across headcount, attrition (16.1%), and department turnover.
+   - Constructed ETL transformations in Power Query and authored DAX calculated measures with interactive multi-dimensional slicers.
+   - GitHub: https://github.com/SanthoshK-ux/HR-Data-Analytics
+
+2. AI Resume Analyzer (Python · NLP · Sentence Transformers · TF-IDF · AI APIs)
+   - Engineered an AI-driven resume scoring platform evaluating technical candidate alignment against target job descriptions using dense text embeddings.
+   - Implemented semantic matching via Sentence Transformers and TF-IDF vectorization to pinpoint technical skill gaps.
+   - Integrated AI API workflows to generate candidate critique and tailored technical interview questions.
+
+3. Weather Application (Python · RESTful Weather API · JSON)
+   - Built a real-time meteorological utility consuming live REST API endpoints to fetch location-based weather telemetry with robust error handling.
+
+EXPERIENCE & CONTINUOUS LEARNING
+- Data Analytics Internship / Training: Hands-on Python fundamentals, EDA, dataset hygiene, and analytical case studies.
+- Tata Group (Forage): GenAI Powered Data Analytics Job Simulation
+- Simplilearn: Machine Learning using Python
+- Forage: Data Labelling Job Simulation
+- TCS iON: Career Edge - Employability Skills (IT)
+- Cisco Networking Academy: Networking & Technology Workshops
+
+EDUCATION
+- B.Tech in Artificial Intelligence and Data Science (Expected 2028 | CGPA: 8.1 / 10)
+  Ramco Institute of Technology, Rajapalayam, Tamil Nadu, India
+- Higher Secondary Education (Score: 470 / 600)
+  T.N.P.M. Marimuthu Nadar Higher Secondary School
+
+KEY ACHIEVEMENTS
+- Solved 400+ algorithmic and data structure problems on CodeChef (angel_heart_07).
+- Completed multiple verified enterprise job simulations in Generative AI analytics and Machine Learning.`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(plainText).then(() => {
+          showToast('Clean plaintext resume copied to clipboard!');
+        }).catch(() => {
+          prompt('Copy text manually:', plainText);
+        });
+      } else {
+        prompt('Copy text manually:', plainText);
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 /**
  * Subtle Abstract Data Network Background Canvas
  * Concept: Data points -> Connections -> Analytics -> Machine Learning
- * Tuned for Light Theme: Soft slate/blue nodes, delicate interconnecting lines, low CPU overhead.
+ * Adapts dynamically between Executive Light & Slate Dark themes!
  */
 
 (function () {
@@ -23,6 +23,10 @@
   const maxParticles = Math.min(Math.floor(window.innerWidth / 25), 48);
   const connectionDistance = 140;
 
+  function isDarkTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
+  }
+
   // Particle constructor
   function Particle() {
     this.x = Math.random() * width;
@@ -30,7 +34,6 @@
     this.vx = (Math.random() - 0.5) * 0.45;
     this.vy = (Math.random() - 0.5) * 0.45;
     this.radius = Math.random() * 2 + 1.5;
-    // Highlight some nodes as "ML Model Nodes" (deeper blue) and others as "Data Points" (light blue)
     this.isHub = Math.random() > 0.8;
   }
 
@@ -46,12 +49,13 @@
   };
 
   Particle.prototype.draw = function () {
+    const dark = isDarkTheme();
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.isHub ? this.radius + 1.5 : this.radius, 0, Math.PI * 2);
     if (this.isHub) {
-      ctx.fillStyle = 'rgba(37, 99, 235, 0.65)'; // Professional Royal Blue Hub
+      ctx.fillStyle = dark ? 'rgba(96, 165, 250, 0.85)' : 'rgba(37, 99, 235, 0.65)';
     } else {
-      ctx.fillStyle = 'rgba(147, 197, 253, 0.55)'; // Light Blue Data Point
+      ctx.fillStyle = dark ? 'rgba(147, 197, 253, 0.45)' : 'rgba(147, 197, 253, 0.55)';
     }
     ctx.fill();
   };
@@ -76,6 +80,7 @@
 
   function render() {
     ctx.clearRect(0, 0, width, height);
+    const dark = isDarkTheme();
 
     // Draw connecting edges
     for (let i = 0; i < particles.length; i++) {
@@ -85,11 +90,13 @@
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < connectionDistance) {
-          const alpha = (1 - dist / connectionDistance) * 0.22;
+          const alpha = (1 - dist / connectionDistance) * (dark ? 0.28 : 0.22);
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
+          ctx.strokeStyle = dark
+            ? `rgba(96, 165, 250, ${alpha})`
+            : `rgba(37, 99, 235, ${alpha})`;
           ctx.lineWidth = particles[i].isHub || particles[j].isHub ? 1.2 : 0.8;
           ctx.stroke();
         }
@@ -101,11 +108,13 @@
         const mdy = particles[i].y - mouse.y;
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
         if (mdist < mouse.radius) {
-          const mAlpha = (1 - mdist / mouse.radius) * 0.35;
+          const mAlpha = (1 - mdist / mouse.radius) * 0.4;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(29, 78, 216, ${mAlpha})`;
+          ctx.strokeStyle = dark
+            ? `rgba(147, 197, 253, ${mAlpha})`
+            : `rgba(29, 78, 216, ${mAlpha})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         }
