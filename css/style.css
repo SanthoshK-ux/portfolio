@@ -755,12 +755,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .pipeline-kpi {
-  background-color: color-mix(in srgb, var(--bg-secondary) 55%, transparent);
-  border: 1px solid rgba(147, 197, 253, 0.12);
+  background-color: color-mix(in srgb, var(--bg-secondary) 45%, transparent);
+  border: none;
   border-radius: var(--radius-md);
   padding: 12px;
   text-align: center;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px -8px rgba(2, 6, 23, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .pipeline-kpi-val {
@@ -778,12 +779,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .pipeline-graph {
-  background: color-mix(in srgb, var(--bg-secondary) 55%, transparent);
-  border: 1px solid rgba(147, 197, 253, 0.12);
+  background: color-mix(in srgb, var(--bg-secondary) 45%, transparent);
+  border: none;
   border-radius: var(--radius-md);
   padding: 16px;
   position: relative;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px -8px rgba(2, 6, 23, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .graph-label {
@@ -806,7 +808,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   padding: 12px 20px;
   background-color: transparent;
-  border-top: 1px solid rgba(147, 197, 253, 0.12);
+  border-top: none;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--text-muted);
