@@ -1,6 +1,6 @@
 # Santhosh K — Personal Portfolio Website
 
-> **Data Analyst | Aspiring Data Scientist | Machine Learning Engineer**  
+> **Data Analyst | Aspiring Data Scientist**  
 > *"Turning Data Into Insights, Intelligence & Impact."*
 
 A premium, production-ready personal portfolio website built with a modern technology-company aesthetic (clean light theme, refined SaaS visual polish, recruiter-focused conversion hierarchy, and interactive project deep-dives).
