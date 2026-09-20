@@ -1,6 +1,6 @@
 /**
- * Premium Abstract Data Network Background Canvas
- * Soft glow, pulsing hub nodes, gradient connections, elegant slow motion.
+ * Animated Gradient Mesh Background
+ * Smooth, slow-moving color waves (mesh gradient style) — no particles, no grid lines.
  * Adapts dynamically between Executive Light & Slate Dark themes!
  */
 
@@ -18,157 +18,75 @@
 
   // Check user preference for reduced motion
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  const particles = [];
-  const maxParticles = Math.min(Math.floor(window.innerWidth / 28), 42);
-  const connectionDistance = 150;
 
   function isDarkTheme() {
     return document.documentElement.getAttribute('data-theme') === 'dark';
   }
 
-  // Particle constructor
-  function Particle() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
-    this.vx = (Math.random() - 0.5) * 0.22;
-    this.vy = (Math.random() - 0.5) * 0.22;
-    this.radius = Math.random() * 1.8 + 1.3;
-    this.isHub = Math.random() > 0.82;
-    this.pulseOffset = Math.random() * Math.PI * 2;
-    this.pulseSpeed = 0.015 + Math.random() * 0.01;
+  // Each "blob" is a soft moving light source that blends into a mesh gradient
+  function Blob() {
+    this.baseX = Math.random();
+    this.baseY = Math.random();
+    this.speedX = 0.00018 + Math.random() * 0.00012;
+    this.speedY = 0.00015 + Math.random() * 0.00012;
+    this.rangeX = 0.28 + Math.random() * 0.14;
+    this.rangeY = 0.28 + Math.random() * 0.14;
+    this.radius = 0.42 + Math.random() * 0.22;
+    this.phase = Math.random() * Math.PI * 2;
   }
 
-  Particle.prototype.update = function () {
-    this.x += this.vx;
-    this.y += this.vy;
-
-    if (this.x < -20) this.x = width + 20;
-    else if (this.x > width + 20) this.x = -20;
-
-    if (this.y < -20) this.y = height + 20;
-    else if (this.y > height + 20) this.y = -20;
+  Blob.prototype.pos = function (t) {
+    const x = (this.baseX + Math.sin(t * this.speedX + this.phase) * this.rangeX) * width;
+    const y = (this.baseY + Math.cos(t * this.speedY + this.phase) * this.rangeY) * height;
+    return { x: x, y: y, r: this.radius * Math.max(width, height) };
   };
 
-  Particle.prototype.draw = function () {
+  const blobs = [new Blob(), new Blob(), new Blob(), new Blob()];
+
+  // Color palettes per blob, tuned per theme
+  function getPalette() {
     const dark = isDarkTheme();
-    const pulse = this.isHub ? (Math.sin(time * this.pulseSpeed + this.pulseOffset) + 1) / 2 : 0;
-    const baseRadius = this.isHub ? this.radius + 2 + pulse * 1.8 : this.radius;
-
-    if (this.isHub) {
-      // Soft outer glow for hub nodes
-      const glowRadius = baseRadius * 5;
-      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
-      const glowAlpha = dark ? 0.22 + pulse * 0.14 : 0.16 + pulse * 0.1;
-      if (dark) {
-        gradient.addColorStop(0, `rgba(96, 165, 250, ${glowAlpha})`);
-        gradient.addColorStop(1, 'rgba(96, 165, 250, 0)');
-      } else {
-        gradient.addColorStop(0, `rgba(37, 99, 235, ${glowAlpha})`);
-        gradient.addColorStop(1, 'rgba(37, 99, 235, 0)');
-      }
-      ctx.beginPath();
-      ctx.fillStyle = gradient;
-      ctx.arc(this.x, this.y, glowRadius, 0, Math.PI * 2);
-      ctx.fill();
+    if (dark) {
+      return [
+        'rgba(37, 99, 235, 0.32)',   // blue
+        'rgba(96, 165, 250, 0.26)',  // light blue
+        'rgba(30, 64, 175, 0.28)',   // deep blue
+        'rgba(129, 140, 248, 0.20)', // indigo
+      ];
     }
-
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, baseRadius, 0, Math.PI * 2);
-    if (this.isHub) {
-      ctx.fillStyle = dark ? 'rgba(147, 197, 253, 0.95)' : 'rgba(37, 99, 235, 0.85)';
-    } else {
-      ctx.fillStyle = dark ? 'rgba(147, 197, 253, 0.42)' : 'rgba(147, 197, 253, 0.55)';
-    }
-    ctx.fill();
-  };
-
-  // Initialize particles
-  for (let i = 0; i < maxParticles; i++) {
-    particles.push(new Particle());
+    return [
+      'rgba(59, 130, 246, 0.16)',
+      'rgba(147, 197, 253, 0.18)',
+      'rgba(37, 99, 235, 0.12)',
+      'rgba(165, 180, 252, 0.14)',
+    ];
   }
-
-  // Mouse interaction
-  let mouse = { x: null, y: null, radius: 130 };
-  window.addEventListener('mousemove', function (e) {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
-
-  window.addEventListener('mouseleave', function () {
-    mouse.x = null;
-    mouse.y = null;
-  });
 
   function render() {
     time++;
     ctx.clearRect(0, 0, width, height);
-    const dark = isDarkTheme();
+    ctx.globalCompositeOperation = 'source-over';
+    const palette = getPalette();
 
-    // Draw connecting edges with soft gradient strokes
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+    // Soft blur for smooth mesh-like blending across the canvas
+    ctx.filter = 'blur(60px)';
 
-        if (dist < connectionDistance) {
-          const proximity = 1 - dist / connectionDistance;
-          const baseAlpha = proximity * (dark ? 0.32 : 0.24);
-          const lineGradient = ctx.createLinearGradient(
-            particles[i].x, particles[i].y,
-            particles[j].x, particles[j].y
-          );
-          const c1 = dark ? `rgba(96, 165, 250, ${baseAlpha})` : `rgba(37, 99, 235, ${baseAlpha})`;
-          const c2 = dark ? `rgba(147, 197, 253, ${baseAlpha * 0.5})` : `rgba(96, 165, 250, ${baseAlpha * 0.5})`;
-          lineGradient.addColorStop(0, c1);
-          lineGradient.addColorStop(1, c2);
-
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = lineGradient;
-          ctx.lineWidth = particles[i].isHub || particles[j].isHub ? 1.3 : 0.7;
-          ctx.stroke();
-        }
-      }
-
-      // Connect to mouse gently, with a soft glow
-      if (mouse.x !== null && mouse.y !== null) {
-        const mdx = particles[i].x - mouse.x;
-        const mdy = particles[i].y - mouse.y;
-        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mdist < mouse.radius) {
-          const mAlpha = (1 - mdist / mouse.radius) * 0.45;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = dark
-            ? `rgba(147, 197, 253, ${mAlpha})`
-            : `rgba(29, 78, 216, ${mAlpha})`;
-          ctx.lineWidth = 1.1;
-          ctx.stroke();
-        }
-      }
-
-      particles[i].update();
-      particles[i].draw();
-    }
-
-    // Subtle glow ring around cursor
-    if (mouse.x !== null && mouse.y !== null) {
-      const cursorGradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 90);
-      cursorGradient.addColorStop(0, dark ? 'rgba(96, 165, 250, 0.10)' : 'rgba(37, 99, 235, 0.08)');
-      cursorGradient.addColorStop(1, 'rgba(96, 165, 250, 0)');
+    blobs.forEach(function (blob, i) {
+      const p = blob.pos(time);
+      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      gradient.addColorStop(0, palette[i % palette.length]);
+      gradient.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.beginPath();
-      ctx.fillStyle = cursorGradient;
-      ctx.arc(mouse.x, mouse.y, 90, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
-    }
+    });
 
-    animationFrameId = requestAnimationFrame(render);
+    ctx.filter = 'none';
+
+    if (!prefersReducedMotion) {
+      animationFrameId = requestAnimationFrame(render);
+    }
   }
 
   // Handle window resizing smoothly
@@ -178,23 +96,27 @@
     resizeTimeout = setTimeout(function () {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      if (prefersReducedMotion) render();
     }, 200);
   });
 
-  // Pause canvas when out of view
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          if (!animationFrameId) render();
-        } else {
-          cancelAnimationFrame(animationFrameId);
-          animationFrameId = null;
-        }
-      });
-    },
-    { threshold: 0.05 }
-  );
-
-  observer.observe(canvas);
+  // Pause canvas when out of view (skip if reduced motion, since it's already static)
+  if (!prefersReducedMotion) {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (!animationFrameId) render();
+          } else {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+  } else {
+    render();
+  }
 })();
