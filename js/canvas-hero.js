@@ -145,6 +145,22 @@
         stars.push(new Star(layer.depth));
       }
     });
+
+    // Dense dust cluster concentrated along the diagonal milky band for authentic look
+    const bandDustCount = Math.floor((width * height) / 6000);
+    for (let i = 0; i < bandDustCount; i++) {
+      const s = new Star(0.08 + Math.random() * 0.15);
+      // Bias position toward the diagonal band (y = 0.42h line, tilted)
+      const t = Math.random();
+      const alongX = t * width;
+      const bandCenterY = height * 0.42 - (alongX - width * 0.5) * Math.tan(0.35);
+      const spread = (Math.random() - 0.5) * height * 0.32;
+      s.x = alongX;
+      s.y = bandCenterY + spread;
+      s.radius *= 0.7;
+      stars.push(s);
+    }
+
     return stars;
   }
 
@@ -153,22 +169,24 @@
   // ---------- Shooting stars ----------
   const shootingStars = [];
   function spawnShootingStar() {
-    const startX = Math.random() * width * 0.6 + width * 0.2;
-    const startY = Math.random() * height * 0.25;
-    const angle = (Math.PI / 4) + (Math.random() * 0.3 - 0.15); // diagonal down-right-ish
-    const speed = 9 + Math.random() * 6;
+    const startX = Math.random() * width * 0.9 + width * 0.05;
+    const startY = Math.random() * height * 0.4;
+    const angle = (Math.PI / 4) + (Math.random() * 0.5 - 0.25); // varied diagonal
+    const speed = 8 + Math.random() * 9;
+    const size = 0.9 + Math.random() * 1.2;
     shootingStars.push({
       x: startX,
       y: startY,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       life: 0,
-      maxLife: 40 + Math.random() * 20,
-      length: 90 + Math.random() * 60,
+      maxLife: 35 + Math.random() * 25,
+      length: 80 + Math.random() * 90,
+      size: size,
     });
   }
 
-  let nextShootIn = 140 + Math.random() * 200;
+  let nextShootIn = 40 + Math.random() * 60;
 
   // ---------- Mouse parallax + slow auto drift ----------
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
@@ -249,7 +267,8 @@
     nextShootIn--;
     if (nextShootIn <= 0) {
       spawnShootingStar();
-      nextShootIn = 220 + Math.random() * 260;
+      if (Math.random() > 0.6) spawnShootingStar(); // occasional double
+      nextShootIn = 45 + Math.random() * 70;
     }
 
     for (let i = shootingStars.length - 1; i >= 0; i--) {
@@ -269,15 +288,23 @@
 
       ctx.beginPath();
       ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.6;
+      ctx.lineWidth = 1.4 * sh.size;
       ctx.moveTo(sh.x, sh.y);
       ctx.lineTo(tailX, tailY);
       ctx.stroke();
 
-      // Bright head
+      // Bright head with soft glow
+      ctx.beginPath();
+      const headGlow = ctx.createRadialGradient(sh.x, sh.y, 0, sh.x, sh.y, 6 * sh.size);
+      headGlow.addColorStop(0, `rgba(${starColor}, ${fade})`);
+      headGlow.addColorStop(1, `rgba(${starColor}, 0)`);
+      ctx.fillStyle = headGlow;
+      ctx.arc(sh.x, sh.y, 6 * sh.size, 0, Math.PI * 2);
+      ctx.fill();
+
       ctx.beginPath();
       ctx.fillStyle = `rgba(${starColor}, ${fade})`;
-      ctx.arc(sh.x, sh.y, 1.6, 0, Math.PI * 2);
+      ctx.arc(sh.x, sh.y, 1.6 * sh.size, 0, Math.PI * 2);
       ctx.fill();
 
       if (sh.life >= sh.maxLife || sh.x > width + 100 || sh.y > height + 100) {
